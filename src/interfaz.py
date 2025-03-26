@@ -21,19 +21,17 @@ def abririInterfaz():
             if archivo:
                 print("Se cargo la imagen")
                 rutaImagen = archivo
-                # img = Image.open(archivo)
-                
-                # imagenCargada = img
+                img = Image.open(archivo)
+                img2 = img.resize((350, 300))
+                imagen2 = ImageTk.PhotoImage(img2)
+                imagenCargada = ImageTk.PhotoImage(img)
 
-                # imgRedimensionada = img.resize((300, 300))
-                # imagenRedimensionada = ImageTk.PhotoImage(imgRedimensionada)
+                etiquetaImagen = tk.Label(image=imagenCargada)
+                etiquetaImagen.image = imagenCargada
 
-                # if 'etiquetaImagen' in globals() and etiquetaImagen is not None:
-                #     etiquetaImagen.destroy()
-
-                # etiquetaImagen = tk.Label(app, image=imagenRedimensionada)
-                # etiquetaImagen.image = imagenRedimensionada  # Mantener la referencia
-                # etiquetaImagen.pack(pady=10)
+                output = tk.Label(app, text=archivo, image=imagen2)
+                output.image = imagen2
+                output.pack()
             
         except Exception as e:
             print(e)

@@ -42,8 +42,11 @@ def abririInterfazInicio():
     app = tk.Tk()
 
     #* Iniciamos ventana
-    app.title("Interfaz de prueba")
+    app.title("Reconocimiento de Neumonia")
     app.geometry('800x600')
+
+    app.iconbitmap("ProjectHackathon\SIC25gt-Los-Automatas\src\img\icono.ico")
+
 
 
     #? Dimensiones de la pantalla para centrar
@@ -75,12 +78,12 @@ def abririInterfazInicio():
 
     labelCarga1 = tk.Label(
         app,
-        text="Cargue la imagen que desea analizar",
+        text="Cargue la imagen que desea analizar:",
         font=("Arial", 15, "bold"),
         fg='white',
         bg='DarkOrchid4'
     )
-    labelCarga1.pack(pady=30)
+    labelCarga1.pack(pady=10)
 
     butonCargar = tk.Button (
         app, 
@@ -90,7 +93,7 @@ def abririInterfazInicio():
         fg='black',
         command=cargarImagen
     )
-    butonCargar.pack(pady=20)
+    butonCargar.pack(pady=10)
 
     butonAnalizar = tk.Button (
         app, 

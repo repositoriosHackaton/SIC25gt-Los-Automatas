@@ -80,7 +80,7 @@ modelo = tf.keras.Sequential([
     tf.keras.layers.Dense(80, activation=tf.nn.relu), #usamos la función de activación de relu
     tf.keras.layers.Dense(35, activation=tf.nn.relu),
     #tenemos dos salidas
-    tf.keras.layers.Dense(2, activation=tf.nn.softmax) #Softmax para redes de clasificación, así vemos que la suma en la salida sea siempre 1
+    tf.keras.layers.Dense(2, activation='softmax') #Softmax para redes de clasificación, así vemos que la suma en la salida sea siempre 1
 
 ])
 
@@ -120,4 +120,4 @@ plt.ylabel("Magnitud de pérdida")
 plt.plot(historial.history["loss"])
 
 # guardar modelo
-modelo.save("modelo_pneumonia.keras")
+modelo.save("modelo_pneumonia.keras", save_format="keras", include_optimizer=False)

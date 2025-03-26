@@ -21,25 +21,25 @@ def abririInterfaz():
             if archivo:
                 print("Se cargo la imagen")
                 rutaImagen = archivo
-                img = Image.open(archivo)
+                # img = Image.open(archivo)
                 
-                imagenCargada = img
+                # imagenCargada = img
 
-                imagenRedimensionada = img.resize((300, 300))
-                imagenRedimensionada = ImageTk.PhotoImage(imagenRedimensionada)
+                # imgRedimensionada = img.resize((300, 300))
+                # imagenRedimensionada = ImageTk.PhotoImage(imgRedimensionada)
 
-                if 'etiquetaImagen' in globals() and etiquetaImagen is not None:
-                    etiquetaImagen.destroy()
+                # if 'etiquetaImagen' in globals() and etiquetaImagen is not None:
+                #     etiquetaImagen.destroy()
 
-                etiquetaImagen = tk.Label(app, image=imagenRedimensionada)
-                etiquetaImagen.image = imagenRedimensionada  # Mantener la referencia
-                etiquetaImagen.pack(pady=10)
+                # etiquetaImagen = tk.Label(app, image=imagenRedimensionada)
+                # etiquetaImagen.image = imagenRedimensionada  # Mantener la referencia
+                # etiquetaImagen.pack(pady=10)
             
         except Exception as e:
             print(e)
             print("Error al cargar la imagen")
 
-    def analizarImg():
+    def analizarImagen():
         global rutaImagen
         try:
             if rutaImagen:        
@@ -47,12 +47,20 @@ def abririInterfaz():
                 #? hacer logica para llamar a los metodos q analizan la imagen desde main.py
                 from main import analizarImg  # Importar aquí para evitar el ciclo
 
-                analizarImg(rutaImagen)
+                resultado, porcentajePrediccionStr = analizarImg(rutaImagen)
+                etiquetaResultado.config(
+                    text=f"Resultado: {resultado}\nConfianza: {porcentajePrediccionStr}"
+                )
             else:
                 tk.messagebox.showwarning(title="Advertencia", message="Primero debe de seleccionar una imagen.", )
         except Exception as e:
             print(e)
             print("Error al analizar la imagen")
+
+    def cerraVentana():
+        print("Terminando programa...")
+        app.destroy()
+        exit()
 
     app = tk.Tk()
 
@@ -78,6 +86,7 @@ def abririInterfaz():
     #* Configuramos ventana
     app.configure(bg='DarkOrchid4')
     app.geometry(str(wventana)+"x"+str(hventana)+"+"+str(x)+"+"+str(y))
+    app.protocol("WM_DELETE_WINDOW", cerraVentana)
 
     # geometry(str(wventana)+"x"+str(hventana)+"+"+str(pwidth)+"+"+str(pheight))
 
@@ -116,9 +125,18 @@ def abririInterfaz():
         font=("Arial", 12, "bold"),
         bg='white',
         fg='black',
-        command=analizarImg
+        command=analizarImagen
     )
     butonAnalizar.pack(pady=20)
+
+    etiquetaResultado = tk.Label(
+        app,
+        text="",
+        font=("Arial", 15, "bold"),
+        fg='white',
+        bg='DarkOrchid4'
+    )
+    etiquetaResultado.pack(pady=20)
 
     #? Hacer logica para que aparezca la imagen cargada
 

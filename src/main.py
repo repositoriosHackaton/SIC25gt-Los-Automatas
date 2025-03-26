@@ -7,10 +7,20 @@ import cv2 as cv #nos facilita el tratar con imagenes
 from medmnist import PneumoniaMNIST, INFO #librería que nos permite acceder a un dataset de imagenes de rayos x
 from modelo import *
 from interfazInicio import interfazInicio
+import os
+
+
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 #cargar modelo, de esta manera no se debe de hacer siempre
 try:
-    modelo = tf.keras_model.load_model("modelo_pneumonia.keras", compile=False)
+    # modelo = tf.keras.models.load_model("modelo_pneumonia.keras")
+    modelo = tf.keras.models.load_model("modelo_pneumonia.keras", compile=False)
+    modelo.compile(
+        optimizer='adam',
+        loss=tf.keras.losses.SparseCategoricalCrossentropy(),
+        metrics=['accuracy']
+    )
     print("Modelo cargado correctamente.")
 except Exception as e:
     print(f"Error al cargar el modelo: {e}")
@@ -52,6 +62,8 @@ def analizarImg(ruta_imagen):
     plt.figtext(0.5, 0.01, f"Resultado del análisis: {porcentajePrediccionStr} de {resultado}", 
         ha="center", fontsize=12, bbox={"facecolor": "white", "alpha": 0.7, "pad": 5})
     plt.show()
+
+    return resultado, porcentajePrediccionStr
 
 
 interfazInicio()

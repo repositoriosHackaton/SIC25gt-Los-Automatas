@@ -6,6 +6,7 @@ import numpy as np #librería para poder trabajar con matrices
 import cv2 as cv #nos facilita el tratar con imagenes
 from medmnist import PneumoniaMNIST, INFO #librería que nos permite acceder a un dataset de imagenes de rayos x
 from modelo import *
+from interfazInicio import interfazInicio
 
 #cargar modelo, de esta manera no se debe de hacer siempre
 try:
@@ -38,21 +39,19 @@ def predecir_neumonia(ruta_imagen):
 
 # Ruta de la imagen a analizar
 def analizarImg(ruta_imagen):
-  resultado, porcentajePrediccionStr = predecir_neumonia(ruta_imagen) #analizamos la imagen para clasificarla
-  print(f"Resultado del análisis: {resultado}")#mostramos el resultado
+    resultado, porcentajePrediccionStr = predecir_neumonia(ruta_imagen) #analizamos la imagen para clasificarla
+    print(f"Resultado del análisis: {resultado}")#mostramos el resultado
 
-  #leemos la imagen
-  imagen = cv.imread(ruta_imagen, cv.IMREAD_GRAYSCALE)
+    #leemos la imagen
+    imagen = cv.imread(ruta_imagen, cv.IMREAD_GRAYSCALE)
 
-  # Mostrar la imagen con Matplotlib
-  plt.imshow(imagen, cmap='gray')  # Mostrar en escala de grises
-  plt.axis("off")  # Ocultar ejes
-  plt.subplots_adjust(bottom=0.2)
-  plt.figtext(0.5, 0.01, f"Resultado del análisis: {porcentajePrediccionStr} de {resultado}", 
-              ha="center", fontsize=12, bbox={"facecolor": "white", "alpha": 0.7, "pad": 5})
-  plt.show()
+    # Mostrar la imagen con Matplotlib
+    plt.imshow(imagen, cmap='gray')  # Mostrar en escala de grises
+    plt.axis("off")  # Ocultar ejes
+    plt.subplots_adjust(bottom=0.2)
+    plt.figtext(0.5, 0.01, f"Resultado del análisis: {porcentajePrediccionStr} de {resultado}", 
+        ha="center", fontsize=12, bbox={"facecolor": "white", "alpha": 0.7, "pad": 5})
+    plt.show()
 
 
-print("Ingrese la ruta de su imagen: ")
-rutaImagen = input()
-analizarImg(rutaImagen) #llamamos a la funcion para analizar la imagen
+interfazInicio()

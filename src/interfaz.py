@@ -1,13 +1,12 @@
 import tkinter as tk 
 from tkinter import filedialog
 from PIL import Image, ImageTk
-from main import analizarImg
 
 imagenCargada = None
 imagenRedimensionada = None
 rutaImagen = None
 
-def abririInterfazInicio():
+def abririInterfaz():
 
 
     def cargarImagen():
@@ -46,6 +45,8 @@ def abririInterfazInicio():
             if rutaImagen:        
                 print("Analizando imagen")
                 #? hacer logica para llamar a los metodos q analizan la imagen desde main.py
+                from main import analizarImg  # Importar aquí para evitar el ciclo
+
                 analizarImg(rutaImagen)
             else:
                 tk.messagebox.showwarning(title="Advertencia", message="Primero debe de seleccionar una imagen.", )

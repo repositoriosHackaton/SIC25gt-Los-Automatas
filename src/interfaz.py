@@ -4,13 +4,14 @@ from PIL import Image, ImageTk
 from main import analizarImg
 
 imagenCargada = None
+imagenRedimensionada = None
 rutaImagen = None
 
 def abririInterfazInicio():
 
 
     def cargarImagen():
-        global imagenCargada
+        global imagenCargada, imagenRedimensionada, rutaImagen
         print("Cargando imagen")
 
         try:
@@ -20,27 +21,37 @@ def abririInterfazInicio():
             
             if archivo:
                 print("Se cargo la imagen")
+                rutaImagen = archivo
                 img = Image.open(archivo)
-                img2 = img.resize((350, 300))
-                imagen2 = ImageTk.PhotoImage(img2)
-                imagenCargada = ImageTk.PhotoImage(img)
+                
+                imagenCargada = img
 
-                etiquetaImagen = tk.Label(image=imagenCargada)
-                etiquetaImagen.image = imagenCargada
+                imagenRedimensionada = img.resize((300, 300))
+                imagenRedimensionada = ImageTk.PhotoImage(imagenRedimensionada)
 
-                output = tk.Label(app, text=archivo, image=imagen2)
-                output.image = imagen2
-                output.pack()
-        
+                if 'etiquetaImagen' in globals() and etiquetaImagen is not None:
+                    etiquetaImagen.destroy()
+
+                etiquetaImagen = tk.Label(app, image=imagenRedimensionada)
+                etiquetaImagen.image = imagenRedimensionada  # Mantener la referencia
+                etiquetaImagen.pack(pady=10)
+            
         except Exception as e:
             print(e)
             print("Error al cargar la imagen")
 
     def analizarImg():
-        print("Analizando imagen")
-        #? hacer logica para llamar a los metodos q analizan la imagen desde main.py
-        analizarImg(rutaImagen)
-
+        global rutaImagen
+        try:
+            if rutaImagen:        
+                print("Analizando imagen")
+                #? hacer logica para llamar a los metodos q analizan la imagen desde main.py
+                analizarImg(rutaImagen)
+            else:
+                tk.messagebox.showwarning(title="Advertencia", message="Primero debe de seleccionar una imagen.", )
+        except Exception as e:
+            print(e)
+            print("Error al analizar la imagen")
 
     app = tk.Tk()
 
@@ -48,7 +59,7 @@ def abririInterfazInicio():
     app.title("Reconocimiento de Neumonia")
     app.geometry('800x600')
 
-    app.iconbitmap("ProjectHackathon\SIC25gt-Los-Automatas\src\img\icono.ico")
+    app.iconbitmap("img\icono.ico")
 
 
 

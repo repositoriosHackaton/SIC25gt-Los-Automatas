@@ -20,34 +20,7 @@ app = tk.Tk()
 app.title("Bienvenida!")
 app.geometry('650x300')
 
-app.iconbitmap("ProjectHackathon\SIC25gt-Los-Automatas\src\img\icono.ico")
-
-#* Cambiar title Bar, si se quiere regresar a normal quitar esto, 
-# titleBar = Frame(app, bg='black', relief='raised', bd=4, highlightthickness=0)
-# close_button = Button(titleBar, text='X', command= app.destroy,bg = "#2e2e2e",padx = 2,pady = 2,activebackground='red',bd = 1,font="bold",fg='white',highlightthickness=0)
-# window = Canvas(app, bg='black', highlightthickness=0)
-# titleBar.pack(expand=1, fill=X)
-# close_button.pack(side=RIGHT)
-# window.pack(expand=1, fill=BOTH)
-
-# xwin=None
-# ywin=None
-
-# def move_window(event):
-#     app.geometry('+{0}+{1}'.format(event.x_root, event.y_root))
-# def change_on_hovering(event):
-#     global close_button
-#     close_button['bg']='red'
-# def return_to_normalstate(event):
-#     global close_button
-#     close_button['bg']='#2e2e2e'
-    
-
-# titleBar.bind('<B1-Motion>', move_window)
-# close_button.bind('<Enter>',change_on_hovering)
-# close_button.bind('<Leave>',return_to_normalstate)
-
-#* Termina title bar
+app.iconbitmap("img\icono.ico")
 
 #? Dimensiones de la pantalla para centrar
 wtotal = app.winfo_screenwidth()

@@ -1,10 +1,43 @@
 import tkinter as tk 
+from tkinter import filedialog
+from PIL import Image, ImageTk
+
+imagenCargada = None
 
 def abririInterfazInicio():
 
-    print('-'*50)
-    print("Se abrio la interfaz principal 2")
-    print('-'*50)
+
+    def cargarImagen():
+        global imagenCargada
+        print("Cargando imagen")
+
+        try:
+            archivo = filedialog.askopenfilename(
+                title="Seleccione una imagen", 
+                filetypes=[("Imagenes", "*.png *.jpg *.jpeg")])
+            
+            if archivo:
+                print("Se cargo la imagen")
+                img = Image.open(archivo)
+                img2 = img.resize((350, 300))
+                imagen2 = ImageTk.PhotoImage(img2)
+                imagenCargada = ImageTk.PhotoImage(img)
+
+                etiquetaImagen = tk.Label(image=imagenCargada)
+                etiquetaImagen.image = imagenCargada
+
+                output = tk.Label(app, text=archivo, image=imagen2)
+                output.image = imagen2
+                output.pack()
+        
+        except Exception as e:
+            print(e)
+            print("Error al cargar la imagen")
+
+    def analizarImg():
+        print("Analizando imagen")
+        #? hacer logica para llamar a los metodos q analizan la imagen desde main.py
+
 
     app = tk.Tk()
 
@@ -55,9 +88,21 @@ def abririInterfazInicio():
         font=("Arial", 12, "bold"),
         bg='white',
         fg='black',
-        
+        command=cargarImagen
     )
     butonCargar.pack(pady=20)
+
+    butonAnalizar = tk.Button (
+        app, 
+        text="Analizar imagen",
+        font=("Arial", 12, "bold"),
+        bg='white',
+        fg='black',
+        command=analizarImg
+    )
+    butonAnalizar.pack(pady=20)
+
+    #? Hacer logica para que aparezca la imagen cargada
 
 
     app.mainloop()

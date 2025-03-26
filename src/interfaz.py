@@ -1,8 +1,10 @@
 import tkinter as tk 
 from tkinter import filedialog
 from PIL import Image, ImageTk
+from main import analizarImg
 
 imagenCargada = None
+rutaImagen = None
 
 def abririInterfazInicio():
 
@@ -37,6 +39,7 @@ def abririInterfazInicio():
     def analizarImg():
         print("Analizando imagen")
         #? hacer logica para llamar a los metodos q analizan la imagen desde main.py
+        analizarImg(rutaImagen)
 
 
     app = tk.Tk()

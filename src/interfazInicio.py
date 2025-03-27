@@ -20,7 +20,7 @@ def interfazInicio():
     app.title("Bienvenida!")
     app.geometry('650x300')
 
-    app.iconbitmap("img\icono.ico")
+    # app.iconbitmap("C:\Users\josue\Documents\SIC\Projects\ProjectHackathon\SIC25gt-Los-Automatas\src\img\icono.ico")
 
     #? Dimensiones de la pantalla para centrar
     wtotal = app.winfo_screenwidth()

@@ -66,4 +66,5 @@ def analizarImg(ruta_imagen):
     return resultado, porcentajePrediccionStr
 
 
-interfazInicio()
+if __name__ == "__main__": #evita el llamado desde la interfaz principal
+    interfazInicio()

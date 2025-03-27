@@ -1,13 +1,15 @@
 import tkinter as tk 
 from tkinter import filedialog
 from PIL import Image, ImageTk
+from Neumonia import ventanaInformacionNeumonia
 
 imagenCargada = None
 imagenRedimensionada = None
 rutaImagen = None
 
-def abririInterfaz():
 
+def abririInterfaz():
+    global imagenCargada, imagenRedimensionada, rutaImagen
 
     def cargarImagen():
         global imagenCargada, imagenRedimensionada, rutaImagen
@@ -26,12 +28,15 @@ def abririInterfaz():
                 imagen2 = ImageTk.PhotoImage(img2)
                 imagenCargada = ImageTk.PhotoImage(img)
 
-                etiquetaImagen = tk.Label(image=imagenCargada)
-                etiquetaImagen.image = imagenCargada
+                etiquetaImagen = tk.Label(app, text=archivo, image=imagen2)
+                etiquetaImagen.image = imagen2
+                etiquetaImagen.pack()
 
-                output = tk.Label(app, text=archivo, image=imagen2)
-                output.image = imagen2
-                output.pack()
+            #     labelEstado.config(text="Imagen cargada correctamente", fg="green")
+            #     labelEstado.update_idletasks()
+
+            # else:
+            #     labelEstado.config(text="No se seleccionó ninguna imagen", fg="red")
             
         except Exception as e:
             print(e)
@@ -55,6 +60,9 @@ def abririInterfaz():
             print(e)
             print("Error al analizar la imagen")
 
+    def llamarInfo():
+        ventanaInformacionNeumonia()
+
     def cerraVentana():
         print("Terminando programa...")
         app.destroy()
@@ -66,7 +74,7 @@ def abririInterfaz():
     app.title("Reconocimiento de Neumonia")
     app.geometry('800x600')
 
-    app.iconbitmap("img\icono.ico")
+    # app.iconbitmap("C:\Users\josue\Documents\SIC\Projects\ProjectHackathon\SIC25gt-Los-Automatas\src\img\icono.ico")
 
 
 
@@ -113,9 +121,19 @@ def abririInterfaz():
         font=("Arial", 12, "bold"),
         bg='white',
         fg='black',
+        cursor="hand2",
         command=cargarImagen
     )
     butonCargar.pack(pady=10)
+
+    # labelEstado = tk.Label(
+    #     app,
+    #     text="No hay imagen seleccionada",
+    #     font=("Arial", 10, "bold"),
+    #     fg='white', 
+    #     bg='DarkOrchid4'
+    # )
+    # labelEstado.pack(pady=10)
 
     butonAnalizar = tk.Button (
         app, 
@@ -123,6 +141,7 @@ def abririInterfaz():
         font=("Arial", 12, "bold"),
         bg='white',
         fg='black',
+        cursor="hand2",
         command=analizarImagen
     )
     butonAnalizar.pack(pady=20)
@@ -136,8 +155,16 @@ def abririInterfaz():
     )
     etiquetaResultado.pack(pady=20)
 
-    #? Hacer logica para que aparezca la imagen cargada
-
+    butonInfo = tk.Button (
+        app, 
+        text="Información sobre la Neumonía",
+        font=("Arial", 12, "bold"),
+        bg='white',
+        fg='black',
+        cursor="hand2",
+        command=llamarInfo
+    )
+    butonInfo.pack(pady=50)
 
     app.mainloop()
 
